@@ -34,8 +34,6 @@ experiencias-unicas/
 └─ vite.config.js # Configuración de Vite
 
 yaml
-Copiar código
-
 ---
 
 ## Requisitos
@@ -49,19 +47,16 @@ Copiar código
 
 ## Clonar el Proyecto
 
-```bash
+
 git clone https://github.com/GabrielReyes3/experiencias-unicas.git
 cd experiencias-unicas
 Levantar el Proyecto con Docker
 Construir y levantar los contenedores:
 
-bash
-Copiar código
 docker compose up --build -d
 Verificar que los contenedores estén corriendo:
 
-bash
-Copiar código
+
 docker compose ps
 Puertos expuestos:
 
@@ -78,13 +73,11 @@ El frontend hace peticiones a /api/* que son redirigidas por Nginx al backend (/
 
 Puedes verificar la conexión directa al backend con:
 
-bash
-Copiar código
+
 curl http://localhost:3001/api/health
 Respuesta esperada:
 
 json
-Copiar código
 {
   "status": "ok",
   "env": "development"
@@ -92,18 +85,14 @@ Copiar código
 Ejecutar Tests de Integración (Supertest)
 Ingresar al backend:
 
-bash
-Copiar código
+
 cd server
 Instalar dependencias (si no está hecho en Docker):
 
-bash
-Copiar código
+
 npm install
 Ejecutar los tests:
 
-bash
-Copiar código
 npm test
 Tests incluidos:
 
@@ -114,20 +103,8 @@ GET /api/__test/services → Verifica que la lista de servicios inicial existe.
 POST /api/__test/services → Crea un nuevo servicio y lo valida con GET.
 
 Variables de Entorno
-Backend .env (ejemplo):
+Backend .env 
 
-ini
-Copiar código
-PORT=3000
-SUPABASE_URL=https://<tu-supabase-url>.supabase.co
-SUPABASE_KEY=<tu-supabase-key>
-JWT_SECRET=supersecreto123
-JWT_EXPIRES_IN=1h
-NODE_ENV=development
-Frontend .env (si aplica):
-
-ini
-Copiar código
 VITE_API_URL=http://localhost/api
 Notas
 Nginx se configura como proxy inverso y redirige /api/ al backend y / al frontend.
