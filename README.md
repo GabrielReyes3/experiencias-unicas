@@ -1,119 +1,202 @@
-# Experiencias Únicas
+# 🌎 Experiencias Únicas
 
-Experiencias Únicas es una plataforma web de servicios turísticos que conecta visitantes con anfitriones locales para ofrecer experiencias personalizadas. La aplicación está construida con **React + Vite** en el frontend y **Node.js + Express** en el backend. Se utiliza **Supabase** como base de datos y **Docker + Nginx** para la contenerización y gestión de proxy inverso.
+**Plataforma web de servicios turísticos que conecta visitantes con anfitriones locales**
 
----
+Experiencias Únicas es una aplicación full-stack moderna que permite a los usuarios descubrir y reservar experiencias turísticas auténticas ofrecidas por anfitriones locales. La plataforma facilita conexiones significativas entre viajeros y comunidades locales, promoviendo un turismo más personalizado y sostenible.
 
-## Estructura del Proyecto
+## ✨ Características Principales
 
+- 🔍 **Exploración de Servicios**: Descubre experiencias turísticas únicas ofrecidas por anfitriones locales
+- 📅 **Sistema de Reservas**: Reserva y gestiona tus experiencias de forma sencilla
+- 👥 **Perfiles de Anfitriones**: Conecta directamente con guías y anfitriones locales
+- 🎨 **Interfaz Moderna**: Diseño responsive y amigable construido con React
+- 🔒 **API RESTful**: Backend robusto con endpoints seguros y bien documentados
+- 🐳 **Contenerización**: Despliegue simplificado con Docker y Nginx
+
+## 🛠️ Stack Tecnológico
+
+### Frontend
+- **React 18** con **Vite** - Framework y herramienta de construcción
+- **Capacitor** - Para capacidades móviles nativas
+
+### Backend
+- **Node.js** con **Express** - Servidor y API REST
+- **Supabase** - Base de datos y autenticación
+
+### DevOps
+- **Docker** & **Docker Compose** - Contenerización
+- **Nginx** - Proxy inverso y servidor web
+- **Supertest** & **Jest** - Testing de integración
+
+## 📁 Estructura del Proyecto
+
+```
 experiencias-unicas/
 │
-├─ .github/ # Workflows y acciones de GitHub
-├─ nginx/ # Configuración de Nginx
-│ └─ default.conf
-├─ node_modules/ # Dependencias del proyecto (gitignore)
-├─ public/ # Archivos estáticos del frontend
-├─ respaldo/ # Carpeta de respaldo opcional
-├─ scripts/ # Scripts auxiliares
-├─ server/ # Backend
-│ ├─ src/ # Código fuente del backend
-│ ├─ test/ # Tests (Supertest / Jest)
-│ ├─ package.json
-│ ├─ package-lock.json
-│ └─ Dockerfile
-├─ .gitignore
-├─ capacitor.config.json # Configuración Capacitor
-├─ docker-compose.yml
-├─ Dockerfile.frontend # Dockerfile para el frontend
-├─ eslint.config.js
-├─ index.html # Entrada principal del frontend
-├─ package.json # Package del frontend
-├─ package-lock.json
-├─ README.md
-├─ vercel.json
-└─ vite.config.js # Configuración de Vite
+├── .github/                 # Workflows y acciones de GitHub
+├── nginx/                   # Configuración de Nginx
+│   └── default.conf        # Configuración del proxy inverso
+├── public/                  # Archivos estáticos del frontend
+├── scripts/                 # Scripts auxiliares
+├── server/                  # Backend de la aplicación
+│   ├── src/                # Código fuente del backend
+│   ├── test/               # Tests de integración (Supertest/Jest)
+│   ├── package.json
+│   └── Dockerfile
+├── docker-compose.yml       # Configuración de servicios Docker
+├── Dockerfile.frontend      # Dockerfile para el frontend
+├── capacitor.config.json    # Configuración de Capacitor
+├── vite.config.js          # Configuración de Vite
+├── package.json            # Dependencias del frontend
+└── README.md
+```
 
-yaml
----
+## 🚀 Inicio Rápido
 
-## Requisitos
+### Prerrequisitos
 
-- Docker y Docker Compose
-- Node.js >= 20 (para desarrollo local)
-- Git
-- Navegador moderno (Chrome, Edge, Firefox)
+- **Docker** y **Docker Compose** instalados
+- **Node.js** >= 20 (para desarrollo local)
+- **Git**
+- Navegador web moderno
 
----
+### Instalación
 
-## Clonar el Proyecto
-
-
+1. **Clonar el repositorio**
+```bash
 git clone https://github.com/GabrielReyes3/experiencias-unicas.git
 cd experiencias-unicas
-Levantar el Proyecto con Docker
-Construir y levantar los contenedores:
+```
 
+2. **Configurar variables de entorno**
+
+Crear archivo `.env` en la raíz con:
+```env
+VITE_API_URL=http://localhost/api
+```
+
+3. **Levantar el proyecto con Docker**
+```bash
 docker compose up --build -d
-Verificar que los contenedores estén corriendo:
+```
 
-
+4. **Verificar que los contenedores estén corriendo**
+```bash
 docker compose ps
-Puertos expuestos:
+```
 
-Frontend: http://localhost:5173
+### 🌐 Puertos y Acceso
 
-Backend: http://localhost:3001 (internamente 3000)
+Una vez levantados los contenedores, la aplicación estará disponible en:
 
-Nginx (proxy inverso): http://localhost
+- **Frontend**: http://localhost:5173
+- **Backend (directo)**: http://localhost:3001
+- **Nginx (proxy inverso)**: http://localhost
 
-Comprobar Funcionamiento del Proxy Inverso
-Acceder a http://localhost/ en el navegador para cargar el frontend.
+> **Nota**: Se recomienda acceder a través de Nginx (http://localhost) para que el proxy inverso redirija correctamente las peticiones API.
 
-El frontend hace peticiones a /api/* que son redirigidas por Nginx al backend (/api/health, /api/service, /api/booking).
+## 🔍 Verificación del Sistema
 
-Puedes verificar la conexión directa al backend con:
+### Comprobar el Backend
 
-
+```bash
 curl http://localhost:3001/api/health
-Respuesta esperada:
+```
 
-json
+**Respuesta esperada:**
+```json
 {
   "status": "ok",
   "env": "development"
 }
-Ejecutar Tests de Integración (Supertest)
-Ingresar al backend:
+```
 
+### Comprobar el Proxy Inverso
 
+1. Abre http://localhost/ en tu navegador
+2. El frontend debería cargar correctamente
+3. Las peticiones a `/api/*` serán redirigidas automáticamente al backend
+
+## 🧪 Testing
+
+El proyecto incluye tests de integración usando Supertest y Jest.
+
+### Ejecutar los Tests
+
+```bash
 cd server
-Instalar dependencias (si no está hecho en Docker):
-
-
 npm install
-Ejecutar los tests:
-
 npm test
-Tests incluidos:
+```
 
-GET /api/health → Verifica que el endpoint de salud responde status: ok.
+### Tests Incluidos
 
-GET /api/__test/services → Verifica que la lista de servicios inicial existe.
+- ✅ **GET /api/health** - Verifica que el endpoint de salud responde correctamente
+- ✅ **GET /api/__test/services** - Verifica la lista de servicios inicial
+- ✅ **POST /api/__test/services** - Crea un nuevo servicio y valida su creación
 
-POST /api/__test/services → Crea un nuevo servicio y lo valida con GET.
+## 🐳 Comandos Docker Útiles
 
-Variables de Entorno
-Backend .env 
+```bash
+# Levantar los servicios
+docker compose up -d
 
-VITE_API_URL=http://localhost/api
-Notas
-Nginx se configura como proxy inverso y redirige /api/ al backend y / al frontend.
+# Ver logs en tiempo real
+docker compose logs -f
 
-Docker Compose levanta 3 servicios: backend, frontend y nginx.
+# Detener los servicios
+docker compose down
 
-Se incluyen pruebas de integración usando Supertest en el backend.
+# Reconstruir las imágenes
+docker compose up --build -d
 
-Autor
-Gabriel Reyes
+# Ver el estado de los contenedores
+docker compose ps
 
-Proyecto desarrollado como MVP para gestión de experiencias turísticas locales.
+# Limpiar volúmenes y reconstruir
+docker compose down -v
+docker compose up --build -d
+```
+
+## 📦 Servicios Docker
+
+El proyecto utiliza tres servicios principales:
+
+1. **backend** - API REST en Node.js/Express
+2. **frontend** - Aplicación React con Vite
+3. **nginx** - Proxy inverso que enruta las peticiones
+
+## 🔧 Configuración de Nginx
+
+Nginx actúa como proxy inverso:
+
+- Peticiones a `/` → Redirige al frontend
+- Peticiones a `/api/` → Redirige al backend
+
+Configuración en `nginx/default.conf`
+
+## 🌱 Desarrollo Local (sin Docker)
+
+### Frontend
+```bash
+npm install
+npm run dev
+```
+
+### Backend
+```bash
+cd server
+npm install
+npm run dev
+```
+
+
+## 📝 Licencia
+
+Este proyecto es un MVP desarrollado con fines educativos y de demostración.
+
+## 👤 Autor
+
+**Gabriel Reyes**
+
+- GitHub: [@GabrielReyes3](https://github.com/GabrielReyes3)
